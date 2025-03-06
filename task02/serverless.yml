@@ -1,0 +1,16 @@
+service: lambda-local-test
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  hello:
+    handler: app/lambdas/hello_world/index.handler
+    events:
+      - http:
+          path: hello
+          method: get
+
+plugins:
+  - serverless-offline
