@@ -17,27 +17,49 @@
 //     return response;
 // };
 
+// exports.handler = async (event) => {
+//     let response;
+//     if (event.rawPath === "/hello" && event.httpMethod === "GET") {
+//         response = {
+//             statusCode: 200,
+//             body: JSON.stringify({ statusCode: 200,message: "Hello from Lambda" }),
+//         };
+       
+//     } else {
+
+//         response = {
+//             statusCode: 400,
+//             body: JSON.stringify({
+//                 statusCode: 400,
+//                 message: "Bad request syntax or unsupported method. Request path: /cmtr-41cac6d3. HTTP method: GET"
+//             }),
+//         };
+       
+//     }
+//     return response;
+// };
+
+
+
 exports.handler = async (event) => {
+    console.log("Incoming event:", JSON.stringify(event, null, 2));
+
     let response;
-    if (event.rawPath === "/hello" && event.httpMethod === "GET") {
+    if (event.rawPath && event.rawPath.endsWith("/hello") && event.httpMethod === "GET") {
         response = {
             statusCode: 200,
-            body: JSON.stringify({ statusCode: 200,message: "Hello from Lambda" }),
+            body: JSON.stringify({ statusCode: 200, message: "Hello from Lambda" }),
+            headers: { "content-type": "application/json" }
         };
-       
     } else {
-
         response = {
             statusCode: 400,
             body: JSON.stringify({
                 statusCode: 400,
-                message: "Bad request syntax or unsupported method. Request path: /cmtr-41cac6d3. HTTP method: GET"
+                message: `Bad request syntax or unsupported method. Request path: ${event.rawPath}. HTTP method: ${event.httpMethod}`
             }),
+            headers: { "content-type": "application/json" }
         };
-       
     }
     return response;
 };
-
-
-
