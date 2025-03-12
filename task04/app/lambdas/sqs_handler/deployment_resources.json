@@ -4,8 +4,8 @@
     "principal_service": "lambda",
     "custom_policies": [
       "lambda-basic-execution",
-      "sqs:ReceiveMessage",
       "sqs:DeleteMessage",
+      "sqs:ReceiveMessage",
       "sqs:GetQueueAttributes"
     ],
     "resource_type": "iam_role",

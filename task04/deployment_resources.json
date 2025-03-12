@@ -14,7 +14,10 @@
             "dynamodb:DeleteItem",
             "ssm:PutParameter",
             "ssm:GetParameter",
-            "kms:Decrypt"
+            "kms:Decrypt",
+            "sqs:DeleteMessage",
+            "sqs:ReceiveMessage",
+            "sqs:GetQueueAttributes"
           ],
           "Effect": "Allow",
           "Resource": "*"
